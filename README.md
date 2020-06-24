@@ -27,7 +27,32 @@ account_activation_token = TokenGenerator()
                     is_active = False,
                 )
  ```
+- après l'enregistrement du mot de passe 
+```python
+### email conf
+     
+                current_site = get_current_site(request) # permet de recuperer le site courant 
+                mail_subject = 'Activate your blog account.' # le sujet du mail
+                # permet de faire le rendu du mail avec des variable
+                message = render_to_string('mail_conf.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token':account_activation_token.make_token(user),
+                })
+                # permet d'envoyer le mail il faut signifier dans ke site configuration smpt
+                send_mail(
+                        mail_subject,
+                        message,
+                        'marylise@gmail.com',
+                        [user.email],
+                ) 
+                success = True 
+                message = " utilisateur enregistré"
+```
+
 - créer une fonction qui va s'occuper de vérifier les données passées dans url 
+
 
 ```python
 def activate(request, uidb64, token):
@@ -51,14 +76,9 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'invalid_link.html')
         
-        ```
- 
-  
-  # # Dans url.py
-  
-  ```python
-  path('account_confirm/<slug:uidb64>/<slug:token>/',views.activate,name="account_confirm_email")
-  ```
+ ````
+
+
 
 # # Dans url.py
 ```python
