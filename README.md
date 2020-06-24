@@ -60,4 +60,17 @@ def activate(request, uidb64, token):
   path('account_confirm/<slug:uidb64>/<slug:token>/',views.activate,name="account_confirm_email")
   ```
 
+# # Dans url.py
+```python
+  path('account_confirm/<slug:uidb64>/<slug:token>/',views.activate,name="account_confirm_email")
+  ```
+  
+# #  html 
+- Créer des fichiers email_confirm.html , invalid_link.html ,mail_conf.html
+- Dans le fichier mail_conf.html y mettre
+```python
+{% autoescape off %} Hi {{ user.username }}, Please click on the link to confirm
+your registration, {{ domain }}{% url 'account_confirm_email' uidb64=uid token=token %}
+{% endautoescape %}
+```
 
