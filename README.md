@@ -1,14 +1,3 @@
-# # Importer
-```python
-######### email conf
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .token import account_activation_token
-from django.core.mail import send_mail
-`````
-
 # # Créer un token.py et à l'interieur y mettre
 ```python 
 
@@ -31,6 +20,16 @@ account_activation_token = TokenGenerator()
  ```
  
  # # Dans le views.py
+ - importer 
+ ```python
+######### email conf
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .token import account_activation_token
+from django.core.mail import send_mail
+`````
  - dans la fonction qui s'occupe de l'inscription mettre is_active = False
  ```python
  user = User(
