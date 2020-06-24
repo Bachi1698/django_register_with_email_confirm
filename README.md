@@ -47,8 +47,7 @@ account_activation_token = TokenGenerator()
                         'marylise@gmail.com',
                         [user.email],
                 ) 
-                success = True 
-                message = " utilisateur enregistré"
+             
 ```
 
 - créer une fonction qui va s'occuper de vérifier les données passées dans url 
